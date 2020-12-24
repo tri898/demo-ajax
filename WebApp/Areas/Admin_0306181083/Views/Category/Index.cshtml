@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebApp.Areas.Admin_0306181083.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                <button  class="btn-danger" name="btn_sua" data-id="@item.ID">Sửa</button>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@section Scripts {
+<script>
+    $('button[name=btn_sua]').click(function () {
+        var id = ($(this).attr('data-id'));
+        $.ajax({
+            method: "GET",
+            url: "../api/CategoryAPI/GetCategory",
+            data: { 'id': id }
+        }).done(function (msg) {
+            alert(msg);
+            });
+        
+
+    });
+</script>
+}

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WebApp.Areas.Admin_0306181083.Models.Post>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Img)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Loai)
+            </th>
+            <th>
+                <a onclick="showInPopup('@Url.Action("AddOrEdit","Post",null,Context.Request.Scheme)','Create Post')" class="btn btn-success text-white"><i class="action-icons"></i>New Post</a>
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    <img src="~/post/@Html.DisplayFor(modelItem => item.Img)" width="150" height="150" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Loai.ID)
+                </td>
+                <td>
+                    <a onclick="showInPopup('@Url.Action("AddOrEdit","Post",new {id=item.ID},Context.Request.Scheme)','Update Post')" class="btn btn-success text-white"><i class="action-icons"></i>Edit</a>
+                  
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
